@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frontend App</title>
+</head>
+<body>
+  <h1>Welcome to the Frontend!</h1>
+  <button onclick="fetchBackend()">Fetch Backend Message</button>
+  <p id="backendMessage"></p>
+  <script>
+    async function fetchBackend() {
+      try {
+        const response = await fetch('http://localhost:5000/message');
+        const data = await response.json();
+        document.getElementById('backendMessage').innerText = data.message;
+      } catch {
+        document.getElementById('backendMessage').innerText = 'Cannot reach backend';
+      }
+    }
+  </script>
+</body>
+</html>

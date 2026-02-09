@@ -17,16 +17,26 @@ source "amazon-ebs" "frontend" {
 
 build {
   sources = ["source.amazon-ebs.frontend"]
-  provisioner "file" {
-    source      = "../frontend/app"
-    destination = "/opt/app"
-  }
+
   provisioner "shell" {
     inline = [
-      "sudo yum install -y nginx",
+      "sudo mkdir -p /opt/app",
+      "sudo yum update -y"
+    ]
+  }
+
+  provisioner "file" {
+    source      = "../frontend/app/"
+    destination = "/opt/app/"
+  }
+
+  provisioner "shell" {
+    inline = [
+      "sudo amazon-linux-extras install nginx1 -y",
       "sudo systemctl enable nginx",
       "sudo systemctl start nginx",
-      "sudo cp -r /opt/app/* /usr/share/nginx/html/"
+      "sudo cp -r /opt/app/* /usr/share/nginx/html/",
+      "sudo chown -R nginx:nginx /usr/share/nginx/html"
     ]
   }
 }

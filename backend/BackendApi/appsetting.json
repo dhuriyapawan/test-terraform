@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Host=DB_ENDPOINT;Port=5432;Database=mydb;Username=dbuser;Password=dbpassword"
+  }
+}

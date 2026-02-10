@@ -11,6 +11,13 @@ jobs:
 
         steps: 
             - uses : actions/checkout@v3
+
+            - name : Build Frontend
+              run: |
+                    cd frontend
+                        dotnet restore FrontendBlazor.csproj
+                        dotnet publish FrontendBlazor.csproj -c Release -o out
+
             
             - name: Build
               run: |
